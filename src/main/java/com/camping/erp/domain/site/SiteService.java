@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -14,12 +15,14 @@ public class SiteService {
     private final SiteRepository siteRepository;
 
     public List<SiteResponse.ListDTO> findAll() {
-        // 직접 구현하세요.
-        return null;
+        return siteRepository.findAll().stream()
+                .map(SiteResponse.ListDTO::new)
+                .collect(Collectors.toList());
     }
 
     public SiteResponse.DetailDTO findById(Long id) {
-        // 직접 구현하세요.
-        return null;
+        Site site = siteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("해당 사이트가 존재하지 않습니다. id=" + id));
+        return new SiteResponse.DetailDTO(site);
     }
 }
