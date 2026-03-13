@@ -41,4 +41,12 @@ public class Image extends BaseTimeEntity {
         this.filePath = filePath;
         this.fileName = fileName;
     }
+
+    public void setGallery(Gallery gallery) {
+        this.gallery = gallery;
+    }
+
+    public void setReview(Review review) {
+        this.review = review;
+    }
 }

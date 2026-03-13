@@ -27,7 +27,7 @@ public class Gallery extends BaseTimeEntity {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
-    @OneToMany(mappedBy = "gallery", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "gallery", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Image> images = new ArrayList<>();
 
     @Builder
@@ -35,5 +35,10 @@ public class Gallery extends BaseTimeEntity {
         this.id = id;
         this.title = title;
         this.content = content;
+    }
+
+    public void addImage(Image image) {
+        this.images.add(image);
+        image.setGallery(this);
     }
 }

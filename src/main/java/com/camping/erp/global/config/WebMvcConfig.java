@@ -7,7 +7,11 @@ import com.camping.erp.global.auth.LoginInterceptor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
@@ -22,6 +26,15 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     public WebMvcConfig(UserRepository userRepository) {
         this.userRepository = userRepository;
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        Path uploadDir = Paths.get("./uploads");
+        String uploadPath = uploadDir.toFile().getAbsolutePath();
+
+        registry.addResourceHandler("/upload/**")
+                .addResourceLocations("file:///" + uploadPath + "/");
     }
 
     @Override

@@ -35,37 +35,30 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Row 1 -->
+                    {{#notices}}
                     <tr>
-                        <td class="px-4 text-secondary">42</td>
-                        <td class="px-4"><span class="badge bg-danger bg-opacity-10 text-danger fw-bold px-2.5 py-1 rounded-pill text-xs">필독</span></td>
+                        <td class="px-4 text-secondary">{{id}}</td>
+                        <td class="px-4"><span class="badge bg-{{categoryClass}} bg-opacity-10 text-{{categoryClass}} fw-bold px-2.5 py-1 rounded-pill text-xs">{{categoryDisplay}}</span></td>
                         <td class="px-4">
-                            <a href="#" class="text-dark fw-bold text-decoration-none hover-primary">2024년 하반기 서버 정기 점검 안내</a>
-                            <span class="material-symbols-outlined pin-icon">push_pin</span>
+                            <a href="/notices/{{id}}" class="text-dark fw-bold text-decoration-none hover-primary">{{title}}</a>
                         </td>
-                        <td class="px-4 text-secondary small">2024.10.24</td>
-                        <td class="px-4 text-center text-secondary small">1,204</td>
+                        <td class="px-4 text-secondary small">{{createdAt}}</td>
+                        <td class="px-4 text-center text-secondary small">{{viewCount}}</td>
                         <td class="px-4 text-center">
                             <div class="d-flex justify-content-center gap-1">
-                                <button class="btn btn-icon btn-sm hover-primary bg-light rounded-2"><span class="material-symbols-outlined fs-5">edit</span></button>
-                                <button class="btn btn-icon btn-sm hover-danger bg-light rounded-2"><span class="material-symbols-outlined fs-5 text-danger opacity-75">delete</span></button>
+                                <button onclick="location.href='/admin/notices/edit/{{id}}'" class="btn btn-icon btn-sm hover-primary bg-light rounded-2"><span class="material-symbols-outlined fs-5">edit</span></button>
+                                <form action="/admin/notices/delete/{{id}}" method="post" style="display:inline;" onsubmit="return confirm('정말 삭제하시겠습니까?');">
+                                    <button type="submit" class="btn btn-icon btn-sm hover-danger bg-light rounded-2"><span class="material-symbols-outlined fs-5 text-danger opacity-75">delete</span></button>
+                                </form>
                             </div>
                         </td>
                     </tr>
-                    <!-- Row 2 -->
+                    {{/notices}}
+                    {{^notices}}
                     <tr>
-                        <td class="px-4 text-secondary">41</td>
-                        <td class="px-4"><span class="badge bg-primary bg-opacity-10 text-primary fw-bold px-2.5 py-1 rounded-pill text-xs">일반</span></td>
-                        <td class="px-4"><a href="#" class="text-dark fw-bold text-decoration-none hover-primary">사용자 약관 및 개인정보 처리방침 개정 안내</a></td>
-                        <td class="px-4 text-secondary small">2024.10.22</td>
-                        <td class="px-4 text-center text-secondary small">856</td>
-                        <td class="px-4 text-center">
-                            <div class="d-flex justify-content-center gap-1">
-                                <button class="btn btn-icon btn-sm hover-primary bg-light rounded-2"><span class="material-symbols-outlined fs-5">edit</span></button>
-                                <button class="btn btn-icon btn-sm hover-danger bg-light rounded-2"><span class="material-symbols-outlined fs-5 text-danger opacity-75">delete</span></button>
-                            </div>
-                        </td>
+                        <td colspan="6" class="text-center py-5 text-secondary">등록된 공지사항이 없습니다.</td>
                     </tr>
+                    {{/notices}}
                 </tbody>
             </table>
         </div>

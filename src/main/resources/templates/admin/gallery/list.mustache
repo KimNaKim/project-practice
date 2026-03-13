@@ -27,48 +27,34 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Row 1 -->
+                    {{#galleries}}
                     <tr>
                         <td class="px-4">
                             <div class="thumbnail-box shadow-sm">
-                                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuADvJKrIjfaM4Z5xlP60geJPAT95bdOHvdBt5ixaHVSqj4mdXJlxYXel8wIB7ETyGT3wQo4jfeoNZ19zFmaF9455ZHqtDFWGXRrka_NF00dWXNM4DldKUoXiD1Dikhpc_7O04HBLrDTVf07up38INzcIFnb4gg_3w4jkQ34C0o1WXIoGo3f95ZPEfsgESdRxy4cFTCA8TQn0mePAieWC8jpqkpzpA3AH9x5wprfrgzNxhxYWfhTHMwgRjzFo-qA14G8Z4CK4-qLCtSc" alt="G" class="w-100 h-100 object-fit-cover">
+                                <img src="{{thumbnailPath}}" alt="G" class="w-100 h-100 object-fit-cover">
                             </div>
                         </td>
                         <td class="px-4">
-                            <div class="fw-bold text-dark mb-0">여름 휴가 하이라이트</div>
-                            <div class="text-secondary text-xs">A구역 저녁 호수 뷰</div>
+                            <div class="fw-bold text-dark mb-0">{{title}}</div>
                         </td>
-                        <td class="px-4"><span class="category-badge bg-blue-subtle">캠핑</span></td>
-                        <td class="px-4 text-secondary small">2023-10-24</td>
-                        <td class="px-4 text-center fw-medium">1,240</td>
+                        <td class="px-4"><span class="category-badge bg-blue-subtle">갤러리</span></td>
+                        <td class="px-4 text-secondary small">{{createdAt}}</td>
+                        <td class="px-4 text-center fw-medium">-</td>
                         <td class="px-4 text-end">
                             <div class="d-flex justify-content-end gap-1">
-                                <button class="btn btn-icon btn-sm hover-primary"><span class="material-symbols-outlined fs-5">edit</span></button>
-                                <button class="btn btn-icon btn-sm hover-danger"><span class="material-symbols-outlined fs-5 text-danger opacity-75">delete</span></button>
+                                <button onclick="location.href='/admin/galleries/edit/{{id}}'" class="btn btn-icon btn-sm hover-primary"><span class="material-symbols-outlined fs-5">edit</span></button>
+                                <form action="/admin/galleries/delete/{{id}}" method="post" style="display:inline;" onsubmit="return confirm('정말 삭제하시겠습니까?');">
+                                    <button type="submit" class="btn btn-icon btn-sm hover-danger"><span class="material-symbols-outlined fs-5 text-danger opacity-75">delete</span></button>
+                                </form>
                             </div>
                         </td>
                     </tr>
-                    <!-- Row 2 -->
+                    {{/galleries}}
+                    {{^galleries}}
                     <tr>
-                        <td class="px-4">
-                            <div class="thumbnail-box shadow-sm">
-                                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRH5z2K42ONVgY_cym9iZMlHlfaycdzJ4HxWKWFtKgiJtgz3AUmrcAuVVBEsKCgq3cLlz1y4F2KFjFrfbe5XW6kUiWz3d1fBu41fdOBLYtH5_qmT-LeNZrV3L_q2t3o6McKxfkxH-MitVeognBKkS26X1T_Mv0ZN6z9EN7Mhbs_7UHS12CpRPiOOw0mVczU2EgTc660BP5mINkH3S1H16xVffPUV3QZfLBpYyoM6SvSLF4ib4eq1lnKGloO_VoFaRHtjnXtG5I9NVH" alt="G" class="w-100 h-100 object-fit-cover">
-                            </div>
-                        </td>
-                        <td class="px-4">
-                            <div class="fw-bold text-dark mb-0">최고의 불멍 스팟</div>
-                            <div class="text-secondary text-xs">안전 수칙 및 명당 추천</div>
-                        </td>
-                        <td class="px-4"><span class="category-badge bg-orange-subtle">팁/노하우</span></td>
-                        <td class="px-4 text-secondary small">2023-10-22</td>
-                        <td class="px-4 text-center fw-medium">850</td>
-                        <td class="px-4 text-end">
-                            <div class="d-flex justify-content-end gap-1">
-                                <button class="btn btn-icon btn-sm hover-primary"><span class="material-symbols-outlined fs-5">edit</span></button>
-                                <button class="btn btn-icon btn-sm hover-danger"><span class="material-symbols-outlined fs-5 text-danger opacity-75">delete</span></button>
-                            </div>
-                        </td>
+                        <td colspan="6" class="text-center py-5 text-secondary">등록된 갤러리가 없습니다.</td>
                     </tr>
+                    {{/galleries}}
                 </tbody>
             </table>
         </div>

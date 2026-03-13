@@ -1,0 +1,26 @@
+{{> layout/header}}
+<main class="container py-5" style="max-width: 896px; margin: 0 auto;">
+    {{#notice}}
+    <!-- Notice Header -->
+    <div class="mb-5">
+        <div class="d-flex align-items-center gap-2 mb-3">
+            <span class="badge bg-primary bg-opacity-10 text-primary fw-bold px-3 py-1.5 rounded-pill small">{{categoryDisplay}}</span>
+            <span class="text-secondary small ms-2">{{createdAt}}</span>
+            <span class="text-secondary small ms-auto">조회수 {{viewCount}}</span>
+        </div>
+        <h2 class="display-6 fw-bold text-dark mb-4">{{title}}</h2>
+        <hr class="opacity-10">
+    </div>
+
+    <!-- Notice Content -->
+    <div class="notice-content mb-5 py-3" style="min-height: 300px; line-height: 1.8; color: #444;">
+        {{{content}}}
+    </div>
+
+    <!-- Actions -->
+    <div class="d-flex justify-content-center pt-5 border-top opacity-50">
+        <button onclick="location.href='/notices'" class="btn btn-outline-secondary px-5 py-2.5 fw-bold rounded-pill">목록으로 돌아가기</button>
+    </div>
+    {{/notice}}
+</main>
+{{> layout/footer}}
