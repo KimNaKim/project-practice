@@ -17,22 +17,6 @@ public class AdminController {
         return "admin/stat";
     }
 
-    @GetMapping("/admin/reservations")
-    public String reservationList() {
-        return "admin/reservation/list";
-    }
-
-    @GetMapping("/admin/reservations/{id}/change")
-    public String reservationChangeDetail(@PathVariable Long id) {
-        return "admin/reservation/change-detail";
-    }
-
-    @GetMapping("/admin/reservations/{id}/cancel")
-    public String reservationCancelDetail(@PathVariable Long id) {
-        return "admin/reservation/cancel-detail";
-    }
-
-
     @GetMapping("/admin/notices")
     public String noticeList() {
         return "admin/notice/list";

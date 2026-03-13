@@ -42,6 +42,10 @@ public class Reservation extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private ReservationStatus status; // PENDING, CONFIRMED, CANCEL_REQ, CANCEL_COMP
 
+    public void updateStatus(ReservationStatus status) {
+        this.status = status;
+    }
+
     @Builder
     public Reservation(Long id, User user, Site site, LocalDate checkIn, LocalDate checkOut, Long totalPrice, ReservationStatus status) {
         this.id = id;
