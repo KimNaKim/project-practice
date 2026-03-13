@@ -8,6 +8,9 @@ import java.util.List;
 
 public interface SiteRepository extends JpaRepository<Site, Long> {
     
+    @Query("select s from Site s join fetch s.zone")
+    List<Site> findAllWithZone();
+
     @Query("select s from Site s join fetch s.zone where s.zone.id = :zoneId")
     List<Site> findAllByZoneId(@Param("zoneId") Long zoneId);
 }

@@ -32,15 +32,6 @@ public class AdminController {
         return "admin/reservation/cancel-detail";
     }
 
-    @GetMapping("/admin/users")
-    public String userList() {
-        return "admin/user/list";
-    }
-
-    @GetMapping("/admin/users/{id}")
-    public String userDetail(@PathVariable Long id) {
-        return "admin/user/detail";
-    }
 
     @GetMapping("/admin/notices")
     public String noticeList() {
@@ -72,8 +63,4 @@ public class AdminController {
         return "admin/qna/answer";
     }
 
-    @GetMapping("/admin/sites/season")
-    public String siteSeason() {
-        return "admin/site/season";
-    }
 }

@@ -87,6 +87,20 @@ public class GlobalExceptionHandler {
                 """, e.getMessage());
     }
 
+    @ExceptionHandler(org.springframework.dao.DataIntegrityViolationException.class)
+    public Object exDataIntegrity(org.springframework.dao.DataIntegrityViolationException e, HttpServletRequest request) {
+        String msg = "참조된 데이터(예: 예약 내역)가 있어 삭제할 수 없습니다. 관련 데이터를 먼저 확인해 주세요.";
+        if (isAjaxRequest(request)) {
+            return Resp.fail(HttpStatus.CONFLICT, msg);
+        }
+        return String.format("""
+                <script>
+                    alert('%s');
+                    history.back();
+                </script>
+                """, msg);
+    }
+
     @ExceptionHandler(Exception.class)
     public Object exUnknown(Exception e, HttpServletRequest request) {
         if (isAjaxRequest(request)) {
@@ -97,6 +111,6 @@ public class GlobalExceptionHandler {
                     alert('%s');
                     history.back();
                 </script>
-                """, "관리자에게 {이거 대부분 Get주소 연결문제당} 문의하세요");
+                """, "예상치 못한 오류가 발생했습니다. 관리자에게 문의하세요.");
     }
 }

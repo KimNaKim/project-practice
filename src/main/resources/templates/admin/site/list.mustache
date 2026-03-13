@@ -1,0 +1,125 @@
+{{> layout/admin-header}}
+<div class="p-4 p-lg-5">
+    <div class="d-flex justify-content-between align-items-end mb-5">
+        <div>
+            <h2 class="display-6 fw-black text-dark mb-1">구역 및 사이트 관리</h2>
+            <p class="text-secondary fw-medium mb-0">캠핑장의 구역(Zone)과 개별 사이트(Site) 정보를 관리합니다.</p>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- Zone Management -->
+        <div class="col-lg-5">
+            <div class="fh-card shadow-sm border-0 p-4 mb-4 bg-white rounded-4">
+                <h3 class="h5 fw-bold text-dark mb-4 d-flex align-items-center gap-2">
+                    <span class="material-symbols-outlined text-primary">layers</span> 구역(Zone) 추가
+                </h3>
+                <form action="/admin/zones/save" method="POST">
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-secondary">구역명</label>
+                        <input type="text" name="name" class="form-control form-control-lg fs-6 rounded-3" placeholder="예: A구역, 프리미엄존" required>
+                    </div>
+                    <div class="row g-3 mb-4">
+                        <div class="col-6">
+                            <label class="form-label small fw-bold text-secondary">평시 요금</label>
+                            <input type="number" name="normalPrice" class="form-control rounded-3" placeholder="65000" required>
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label small fw-bold text-secondary">성수기 요금</label>
+                            <input type="number" name="peakPrice" class="form-control rounded-3" placeholder="85000" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 py-2.5 fw-bold shadow-sm border-0 rounded-3">구역 생성하기</button>
+                </form>
+            </div>
+
+            <div class="fh-table-container shadow-sm border-0 overflow-hidden bg-white">
+                <table class="fh-table m-0">
+                    <thead>
+                        <tr>
+                            <th class="px-4 py-3 small fw-bold text-secondary">구역명</th>
+                            <th class="px-4 py-3 small fw-bold text-secondary text-end">평시 요금</th>
+                            <th class="px-4 py-3 small fw-bold text-secondary text-end">관리</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#zones}}
+                        <tr>
+                            <td class="px-4 py-3 fw-bold text-dark">{{name}}</td>
+                            <td class="px-4 py-3 text-end small fw-medium text-secondary">₩{{normalPrice}}</td>
+                            <td class="px-4 py-3 text-end">
+                                <form action="/admin/zones/delete/{{id}}" method="POST" class="m-0 d-inline">
+                                    <button type="submit" class="btn btn-link text-danger p-0 border-0" onclick="return confirm('이 구역을 삭제하시겠습니까? 관련 사이트도 영향을 받을 수 있습니다.')">
+                                        <span class="material-symbols-outlined fs-5">delete</span>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {{/zones}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Site Management -->
+        <div class="col-lg-7">
+            <div class="fh-card shadow-sm border-0 p-4 mb-4 bg-white rounded-4">
+                <h3 class="h5 fw-bold text-dark mb-4 d-flex align-items-center gap-2">
+                    <span class="material-symbols-outlined text-primary">location_on</span> 사이트(Site) 추가
+                </h3>
+                <form action="/admin/sites/save" method="POST">
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold text-secondary">소속 구역</label>
+                            <select name="zoneId" class="form-select form-select-lg fs-6 rounded-3" required>
+                                <option value="" disabled selected>구역 선택</option>
+                                {{#zones}}
+                                <option value="{{id}}">{{name}}</option>
+                                {{/zones}}
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold text-secondary">사이트명</label>
+                            <input type="text" name="siteName" class="form-control form-control-lg fs-6 rounded-3" placeholder="예: A-1, B-2" required>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label small fw-bold text-secondary">최대 수용 인원</label>
+                        <input type="number" name="maxPeople" class="form-control rounded-3" placeholder="4" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 py-2.5 fw-bold shadow-sm border-0 rounded-3">사이트 생성하기</button>
+                </form>
+            </div>
+
+            <div class="fh-table-container shadow-sm border-0 overflow-hidden bg-white">
+                <table class="fh-table m-0">
+                    <thead>
+                        <tr>
+                            <th class="px-4 py-3 small fw-bold text-secondary">구역</th>
+                            <th class="px-4 py-3 small fw-bold text-secondary">사이트명</th>
+                            <th class="px-4 py-3 small fw-bold text-secondary text-center">최대 인원</th>
+                            <th class="px-4 py-3 small fw-bold text-secondary text-end">관리</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#sites}}
+                        <tr>
+                            <td class="px-4 py-3 small fw-bold text-primary">{{zoneName}}</td>
+                            <td class="px-4 py-3 fw-bold text-dark">{{siteName}}</td>
+                            <td class="px-4 py-3 text-center small fw-medium">{{maxPeople}}명</td>
+                            <td class="px-4 py-3 text-end">
+                                <form action="/admin/sites/delete/{{id}}" method="POST" class="m-0 d-inline">
+                                    <button type="submit" class="btn btn-link text-danger p-0 border-0" onclick="return confirm('이 사이트를 삭제하시겠습니까?')">
+                                        <span class="material-symbols-outlined fs-5">delete</span>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {{/sites}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{{> layout/admin-footer}}

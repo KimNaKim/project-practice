@@ -10,14 +10,18 @@
 |--------|------|
 | `Zone.java` | 구역 엔티티 (normalPrice, peakPrice 등 요금 정보 포함) |
 | `Site.java` | 개별 사이트 엔티티 (siteName, maxPeople, Zone 참조) |
+| `ZoneRepository.java` | 구역 CRUD 지원 |
 | `SiteRepository.java` | 구역별 사이트 조회 등 지원 |
-| `SiteService.java` | 사이트 조회 및 가용성 체크 로직 (뼈대 생성됨) |
+| `SiteService.java` | 사이트 조회, CRUD 및 가용성 체크 로직 |
+| `AdminSiteController.java` | 관리자용 구역 및 사이트 관리 (CRUD) |
+| `SiteController.java` | 고객용 사이트 목록 및 상세 조회 |
 | `SiteRequest.java` / `SiteResponse.java` | 데이터 교환용 DTO |
 
 ## AI 작업 지침
 - **가격 산출**: `Zone`의 가격 정보를 바탕으로 시즌별 요금 계산 로직을 구현해야 한다.
 - **Fetch Join**: `Site` 조회 시 성능을 위해 `Zone`과 `fetch join` 사용을 권장한다.
+- **가용성 체크**: `findAvailableSites`는 `ReservationRepository`의 `findOccupiedSiteIds`를 활용한다.
 
-## 미구현 및 향후 과제 (Phase 4 예정)
-- **시즌 관리 CRUD**: 관리자 페이지(`admin/site/season.mustache`)와 연동되는 시즌 생성, 수정, 삭제 기능 및 API 구현 필요.
-- **시즌별 요금 반영**: 예약 시 선택한 날짜가 특정 시즌에 해당할 경우, 해당 시즌의 요금 조정 정책(%, 정액)이 반영된 최종 가격 산출 로직 구현.
+## 완료된 과제
+- **관리자 CRUD**: 구역 및 사이트 생성/삭제 기능 구현 완료.
+- **가용성 필터링**: 날짜 및 인원 기반의 실시간 예약 가능 사이트 필터링 구현 완료.

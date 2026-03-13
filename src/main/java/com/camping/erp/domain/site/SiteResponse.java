@@ -13,6 +13,7 @@ public class SiteResponse {
         private String siteName;
         private String zoneName;
         private Long normalPrice;
+        private Integer maxPeople;
         private String imageUrl; // 우선 목업 이미지 사용
         private Double rating;   // 우선 목업 데이터 사용 (4.0 ~ 5.0 사이)
 
@@ -21,6 +22,7 @@ public class SiteResponse {
             this.siteName = site.getSiteName();
             this.zoneName = site.getZone().getName();
             this.normalPrice = site.getZone().getNormalPrice();
+            this.maxPeople = site.getMaxPeople();
             this.imageUrl = "https://picsum.photos/seed/" + site.getId() + "/400/300"; // 목업
             this.rating = 4.5 + (site.getId() % 5) * 0.1; // 목업
         }

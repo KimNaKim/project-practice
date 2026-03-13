@@ -30,25 +30,6 @@ public class UserController {
         return "redirect:/admin/users";
     }
 
-    // 회원가입 페이지
-    @GetMapping("/join-form")
-    public String joinForm() {
-        return "auth/join-form";
-    }
-
-    // 회원가입 처리
-    @PostMapping("/join")
-    public String join(UserRequest.JoinDTO request) {
-        userService.join(request);
-        return "redirect:/login-form";
-    }
-
-    // 로그인 페이지 (필요하므로 함께 추가)
-    @GetMapping("/login-form")
-    public String loginForm() {
-        return "auth/login-form";
-    }
-
     // 마이페이지 홈
     @GetMapping("/mypage")
     public String home() {
