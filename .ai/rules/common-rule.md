@@ -1,5 +1,9 @@
 # Common Rules
 
+## Communication (언어 규칙)
+- **기본 언어**: 모든 세션 시작, 답변, 코드 설명 및 리뷰는 **한국어**를 원칙으로 한다.
+- **예외**: 코드 내 영문 주석이나 특정 기술 용어는 영어로 작성할 수 있으나, 그에 대한 설명은 한국어로 제공한다.
+
 ## Package Structure
 - **Root**: `com.camping.erp`
 - **Domain-Driven**: `domain/{name}/` 하위에 Controller, Service, Repository, Entity, DTO 배치

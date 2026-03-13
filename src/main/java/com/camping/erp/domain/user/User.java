@@ -40,6 +40,15 @@ public class User extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private UserStatus status; // ACTIVE, ANONYMOUS
 
+    // 권한 토글 메서드
+    public void toggleRole() {
+        if (this.role == UserRole.USER) {
+            this.role = UserRole.ADMIN;
+        } else {
+            this.role = UserRole.USER;
+        }
+    }
+
     @Builder
     public User(Long id, String username, String password, String name, String email, String phone, UserRole role, UserStatus status) {
         this.id = id;

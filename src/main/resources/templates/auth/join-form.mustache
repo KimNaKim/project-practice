@@ -18,23 +18,23 @@
                     <p class="text-secondary fw-medium">새로운 캠핑 여정을 시작하세요</p>
                 </div>
 
-                <form>
+                <form action="/join" method="POST">
                     <div class="mb-4">
                         <label class="form-label small fw-bold text-secondary">이름</label>
-                        <input type="text" class="form-control py-3 shadow-none border-secondary border-opacity-25" placeholder="성함을 입력하세요">
+                        <input name="name" type="text" class="form-control py-3 shadow-none border-secondary border-opacity-25" placeholder="성함을 입력하세요" required>
                     </div>
                     <div class="mb-4">
                         <label class="form-label small fw-bold text-secondary">이메일 주소</label>
-                        <input type="email" class="form-control py-3 shadow-none border-secondary border-opacity-25" placeholder="email@example.com">
+                        <input name="email" type="email" class="form-control py-3 shadow-none border-secondary border-opacity-25" placeholder="email@example.com" required>
                     </div>
                     <div class="mb-4">
                         <label class="form-label small fw-bold text-secondary">휴대폰 번호</label>
-                        <input type="tel" class="form-control py-3 shadow-none border-secondary border-opacity-25" placeholder="010-0000-0000">
+                        <input name="phone" type="tel" class="form-control py-3 shadow-none border-secondary border-opacity-25" placeholder="010-0000-0000" required>
                     </div>
                     <div class="mb-4">
                         <label class="form-label small fw-bold text-secondary">비밀번호</label>
                         <div class="position-relative">
-                            <input type="password" class="form-control py-3 shadow-none border-secondary border-opacity-25" placeholder="비밀번호를 입력하세요">
+                            <input name="password" type="password" class="form-control py-3 shadow-none border-secondary border-opacity-25" placeholder="비밀번호를 입력하세요" required>
                             <span class="material-symbols-outlined password-toggle">visibility</span>
                         </div>
                     </div>
